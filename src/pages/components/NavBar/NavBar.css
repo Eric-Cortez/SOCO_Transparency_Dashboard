@@ -1,126 +1,239 @@
+/* Modern Navigation */
 .navbar {
-  background-color: #ebebeb;
-  color: #333;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 3;
-  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  padding: 1%;
+  justify-content: space-between;
+  height: 70px;
 }
 
-#logo {
-  height: 1.2%;
-  width: 2%;
-  margin: 0 1%;
-}
-
-.logo-container {
+.nav-brand {
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-#nav-header {
-  font-size: 1.5em;
+  align-items: center;
+  gap: var(--space-4);
 }
 
-.navbar ul a {
-  font-size: 1.2em;
-}
-.navbar a {
-  color: black;
-  font-size: 1.2em;
+.nav-logo {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-800));
+  color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
-.navbar a:hover {
-  color: var(--primary-color);
+.nav-logo:hover {
+  transform: rotate(5deg) scale(1.05);
+  box-shadow: var(--shadow-md);
 }
 
-/* Nav Menu */
+.nav-logo svg {
+  width: 24px;
+  height: 24px;
+}
 
-.dropdown {
-  list-style-type: none;
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
   margin: 0;
-  padding: 0;
 }
 
-.dropdown > li {
+.title-main {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-800));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.title-sub {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: -2px;
+}
+
+/* Desktop Menu */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.nav-link {
   position: relative;
-  z-index: 2;
-}
-
-.dropdown > li > ul {
-  visibility: hidden;
-  position: absolute;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  min-width: 150px;
-  background-color: var(--lightgray);
-  border-radius: 2px;
-  z-index: -1;
-  opacity: 0;
-  top: 0;
-}
-.dropdown > li > ul > li {
-  list-style-type: none;
-}
-
-.dropdown > li:hover > ul {
-  visibility: visible;
-  opacity: 11;
-  top: 100%;
-}
-
-.dropdown a {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-600);
   text-decoration: none;
-  font-weight: bold;
-  font-family: var(--main-font);
-  display: inline-block;
-  padding: 15px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  transition: var(--transition-colors);
 }
 
-.dropdown > li > ul a {
-  white-space: nowrap;
-  width: 100%;
-  box-sizing: border-box;
+.nav-link:hover {
+  color: var(--primary-600);
+  background-color: var(--primary-50);
 }
 
-.dropdown > li > ul a:hover {
-  background-color: var(--darkgray);
+.nav-link-active {
+  color: var(--primary-700);
+  background-color: var(--primary-100);
 }
 
-.dropdown a.menu {
-  font-size: 20px;
-  padding: 0;
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background-color: var(--primary-600);
+  border-radius: var(--radius);
 }
 
-.menu-icon {
-  font-size: 3em;
-  padding: 0;
-  margin: 0;
-}
-
-.menu {
+/* Hamburger Menu */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
   border: none;
-  background-color: #ebebeb;;
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease;
 }
 
-@media only screen and (max-device-width: 812px) {
-  /* Styles for mobile devices */
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
-  #nav-header {
-    font-size: 20px;
+.nav-hamburger:hover {
+  background-color: var(--gray-100);
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--gray-700);
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+/* Hamburger Animation */
+.line-1-active {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.line-2-active {
+  opacity: 0;
+}
+
+.line-3-active {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 var(--space-4);
   }
 
-  #logo {
-    height: 20%;
-    width: 20%;
+  .title-main {
+    font-size: var(--font-size-lg);
+  }
+
+  .title-sub {
+    font-size: var(--font-size-xs);
+  }
+
+  .nav-logo {
+    height: 32px;
+    width: 32px;
+  }
+
+  .nav-logo svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: var(--space-8);
+    gap: var(--space-6);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-menu-active {
+    transform: translateX(0);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-lg);
+    padding: var(--space-4) var(--space-6);
+    width: 200px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+  }
+
+  .nav-link-active::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-main {
+    font-size: var(--font-size-base);
+  }
+
+  .title-sub {
+    font-size: 10px;
+  }
+
+  .nav-brand {
+    gap: var(--space-2);
+  }
+
+  .nav-logo {
+    height: 28px;
+    width: 28px;
+  }
+
+  .nav-logo svg {
+    width: 16px;
+    height: 16px;
   }
 }

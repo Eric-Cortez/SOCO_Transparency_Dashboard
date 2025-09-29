@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./App.css";
 import NavBar from "./pages/components/NavBar";
 import Footer from "./pages/components/Footer";
@@ -10,19 +11,22 @@ import NoPage from "./pages/NoPage";
 function App() {
   return (
     <BrowserRouter basename="/SOCO_Transparency_Dashboard">
-      <NavBar />
-      <Switch>
-        <Route exact path="/about">
-          <About />
-        </Route>
-        <Route exact path="/">
-          <ArrestDash />
-        </Route>
-        <Route>
-          <NoPage />
-        </Route>
-      </Switch>
-      <Footer />
+      <div className="app">
+        <NavBar />
+        <motion.main
+          className="main-content"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<ArrestDash />} />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </motion.main>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
