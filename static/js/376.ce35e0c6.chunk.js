@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksoco_transparency_dashboard=self.webpackChunksoco_transparency_dashboard||[]).push([[376],{376:function(r,a,s){s.r(a),s.d(a,{default:function(){return e}});s(791);var n=s(184);function e(r){var a=r.arrestData;return(0,n.jsxs)("div",{className:"arrest-count-container",children:[(0,n.jsx)("h3",{children:"Total Arrests"}),(0,n.jsx)("span",{className:"arrest-count-number",children:a.length})]})}}}]);
-//# sourceMappingURL=376.ce35e0c6.chunk.js.map
